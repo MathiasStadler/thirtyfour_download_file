@@ -1,7 +1,16 @@
 {
     "cSpell.words": [
         "depinfo",
+        "rustfmt",
         "thirtyfour",
         "udeps"
-    ]
+    ],
+    "cSpell.customDictionaries": {
+        "custom-dictionary-workspace": {
+            "name": "custom-dictionary-workspace",
+            "path": "${workspaceFolder:thirtyfour_download_file}/.cspell/custom-dictionary-workspace.txt",
+            "addWords": true,
+            "scope": "workspace"
+        }
+    }
 }

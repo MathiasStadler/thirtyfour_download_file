@@ -9,6 +9,8 @@ mkdir thirtyfour_download_file && cd $_
 touch README.md
 ln -s README.md README
 cargo init .
+cargo add rustfmt
+rustup component add rustfmt
 mkdir examples
 cp src/main.rs examples/example.rs
 # not understood

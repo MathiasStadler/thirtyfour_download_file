@@ -2,8 +2,9 @@ use std::error::Error;
 use std::fmt;
 use std::io::Write;
 use std::process;
-use std::thread;
 use std::time::Duration;
+use std::thread;
+
 
 #[allow(unused_imports)]
 use log::{debug, error, info, log_enabled, Level};
@@ -13,10 +14,7 @@ use std::env::set_var;
 #[allow(unused_imports)]
 use thirtyfour::ChromiumLikeCapabilities;
 #[allow(unused_imports)]
-use thirtyfour::{
-    error::WebDriverResult, prelude::WebDriverError, By, DesiredCapabilities, Key, WebDriver,
-    WebElement,
-};
+use thirtyfour::{prelude::WebDriverError, By, DesiredCapabilities, Key, WebDriver, WebElement};
 
 #[allow(dead_code)]
 #[derive(Debug)]
@@ -80,6 +78,7 @@ async fn download_file() -> Result<(), Box<dyn Error>> {
     // let _driver = init_driver().await?;
 
     let _open: String = String::from("open");
+    let _call:String = String::from("call");
     let _close: String = String::from("close");
 
     let _execute_command_result = execute_command(&_open).await;
@@ -118,6 +117,7 @@ async fn execute_command(cmd: &String) -> Result<(), Box<dyn Error>> {
     debug!("execute_command  _cmd => {}", cmd);
     let _driver = init_driver().await?;
 
+    
     // } else
     if cmd == "close" {
         debug!("execute_command  _cmd => {}", cmd);
@@ -142,17 +142,11 @@ async fn execute_command(cmd: &String) -> Result<(), Box<dyn Error>> {
     Ok(())
 }
 
-async fn close_browser(_driver: WebDriver) -> WebDriverResult<(), Box<dyn Error>> {
+async fn close_browser(_driver: WebDriver) -> Result<(), Box<dyn Error>> {
     // Always explicitly close the browser.
-    let result_quit = _driver.quit();
+    _driver.quit().await?;
 
-    let _result = match result_quit {
-        Ok(_) => {}
-        Err(e) => err,
-    };
-
-    _result;
-    //Ok(())
+    Ok(())
 }
 
 async fn init_driver() -> Result<WebDriver, WebDriverError> {
